@@ -1,21 +1,21 @@
 import { useState } from 'react'
-import { Menu, X, Shield, Network, Cpu } from 'lucide-react'
+import { Menu, X, Shield, Network, Cpu, Users, Phone, Info, Wrench } from 'lucide-react'
+import { Link, NavLink as RouterNavLink } from 'react-router-dom'
 
-function NavLink({ href, children, onClick }) {
+function NavItem({ to, children, onClick }) {
   return (
-    <a
-      href={href}
+    <RouterNavLink
+      to={to}
       onClick={onClick}
-      className="text-slate-200 hover:text-white/90 transition-colors px-3 py-2 rounded-md"
+      className={({ isActive }) => `text-slate-200 hover:text-white/90 transition-colors px-3 py-2 rounded-md ${isActive ? 'text-white' : ''}`}
     >
       {children}
-    </a>
+    </RouterNavLink>
   )
 }
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-
   const close = () => setOpen(false)
 
   return (
@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Brand */}
-          <a href="#home" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <div className="relative">
               <span className="absolute inset-0 rounded-xl blur-lg bg-gradient-to-tr from-cyan-500/40 to-fuchsia-500/40"></span>
               <div className="relative rounded-xl bg-slate-800/60 border border-white/10 p-2">
@@ -34,20 +34,21 @@ export default function Navbar() {
               <div className="text-white font-bold leading-tight">Tech Crunch Limited</div>
               <div className="text-[10px] uppercase tracking-widest text-slate-400 hidden sm:block">Network • Systems • Automation</div>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-2">
-            <NavLink href="#services">Services</NavLink>
-            <NavLink href="#team">Team</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+            <NavItem to="/services"><Wrench className="h-4 w-4 inline mr-2"/>Services</NavItem>
+            <NavItem to="/team"><Users className="h-4 w-4 inline mr-2"/>Team</NavItem>
+            <NavItem to="/about"><Info className="h-4 w-4 inline mr-2"/>About</NavItem>
+            <NavItem to="/contact"><Phone className="h-4 w-4 inline mr-2"/>Contact</NavItem>
           </nav>
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-2">
-            <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white font-medium shadow-lg shadow-cyan-500/20 hover:shadow-fuchsia-500/20 transition">
+            <Link to="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white font-medium shadow-lg shadow-cyan-500/20 hover:shadow-fuchsia-500/20 transition">
               <Shield className="h-4 w-4" /> Secure your network
-            </a>
+            </Link>
           </div>
 
           {/* Mobile */}
@@ -59,12 +60,13 @@ export default function Navbar() {
         {open && (
           <div className="md:hidden border-t border-white/10 py-2">
             <div className="flex flex-col gap-1 py-2">
-              <NavLink href="#services" onClick={close}>Services</NavLink>
-              <NavLink href="#team" onClick={close}>Team</NavLink>
-              <NavLink href="#contact" onClick={close}>Contact</NavLink>
-              <a href="#contact" onClick={close} className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white font-medium">
+              <NavItem to="/services" onClick={close}><Wrench className="h-4 w-4 inline mr-2"/>Services</NavItem>
+              <NavItem to="/team" onClick={close}><Users className="h-4 w-4 inline mr-2"/>Team</NavItem>
+              <NavItem to="/about" onClick={close}><Info className="h-4 w-4 inline mr-2"/>About</NavItem>
+              <NavItem to="/contact" onClick={close}><Phone className="h-4 w-4 inline mr-2"/>Contact</NavItem>
+              <Link to="/contact" onClick={close} className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white font-medium">
                 <Cpu className="h-4 w-4" /> Get a quote
-              </a>
+              </Link>
             </div>
           </div>
         )}
