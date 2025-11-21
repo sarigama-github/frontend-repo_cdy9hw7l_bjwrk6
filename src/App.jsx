@@ -6,7 +6,14 @@ import Contact from './components/Contact'
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-slate-950 text-white relative overflow-x-clip">
+      {/* Global animated background accents */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-cyan-500/10 blur-3xl animate-pulse" />
+        <div className="absolute top-1/3 -right-24 h-[28rem] w-[28rem] rounded-full bg-fuchsia-500/10 blur-3xl animate-[pulse_6s_ease-in-out_infinite]" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-1/2 w-full opacity-[0.15] bg-[radial-gradient(800px_300px_at_50%_100%,#22d3ee,transparent)]" />
+      </div>
+
       <Navbar />
       <Hero />
       <Services />
