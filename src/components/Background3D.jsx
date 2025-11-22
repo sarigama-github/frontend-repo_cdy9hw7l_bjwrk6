@@ -20,7 +20,7 @@ export default function Background3D() {
   }, [pathname])
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10">
+    <div className="pointer-events-none fixed inset-0 z-0">
       {/* Spline canvas */}
       <div className="absolute inset-0 opacity-70">
         <Spline scene={scene} />

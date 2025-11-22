@@ -7,8 +7,10 @@ export default function Layout({ children }) {
       {/* Global 3D animated background per route */}
       <Background3D />
 
-      <Navbar />
-      <main className="pt-16">{children}</main>
+      <div className="relative z-10">
+        <Navbar />
+        <main className="pt-16">{children}</main>
+      </div>
 
       <footer className="border-t border-white/10 py-10 bg-slate-950/80 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
